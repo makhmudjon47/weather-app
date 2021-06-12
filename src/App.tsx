@@ -5,7 +5,7 @@ interface IProps {
 }
 
 const App: FunctionComponent<IProps> = ({ name }) => (
-    <h1 className="text-red-500">Welcome {name}</h1>
+    <h1 className="text-red-500">Hey {name}</h1>
 )
 
 export default App
