@@ -45,11 +45,16 @@ module.exports = {
         }),
         new webpack.DefinePlugin({
             "process.env": {
-                "NVM_HOME": JSON.stringify(process.env.NVM_HOME)
+                "PORT": JSON.stringify(process.env.PORT),
+                "NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+                "API_KEY_OPENWEATHER": JSON.stringify(process.env.API_KEY_OPENWEATHER),
+                "API_KEY_GEOLOCATION": JSON.stringify(process.env.API_KEY_GEOLOCATION),
+                "TAILWIND_MODE": JSON.stringify(process.env.TAILWIND_MODE),
             }
         })
     ],
     devServer: {
-        historyApiFallback: true
+        historyApiFallback: true,
+        port: process.env.PORT || 8080
     }
 }

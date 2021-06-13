@@ -1,13 +1,16 @@
 import React, { FunctionComponent } from 'react'
-import Image from '../../assets/default.jpg'
+import BackgroundImage from '../../assets/cloudy.jpg'
+import MainPanel from '../../views/MainPanel'
+import InfoPanel from '../../views/InfoPanel'
 
 interface IProps {}
 
 const App: FunctionComponent<IProps> = () => {
     return (
-        <div className="bg-blue-800 w-[100vw] h-[100vh] fixed overflow-auto text-white">
-            <h1>Hello Nice</h1>
-            <img src={Image}/>
+        <div className="invisible sm:visible w-[100vw] h-[100vh] fixed grid grid-cols-custom overflow-auto">
+            <img className="w-full h-full absolute" alt="loading..." src={BackgroundImage}/>
+            <MainPanel />
+            <InfoPanel />
         </div>
     )
 }
