@@ -2,6 +2,7 @@ const HtmlPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require('path')
 const webpack = require('webpack')
+require('dotenv').config()
 
 module.exports = {
     mode: 'production',
@@ -15,10 +16,6 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/i,
-                use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
-            },
-            {
                 test: /\.(ts|tsx|js|jsx)$/,
                 exclude: /node_modules/,
                 use: [{ loader: 'babel-loader' }]
@@ -26,7 +23,11 @@ module.exports = {
             {
                 test: /\.html$/,
                 use: [{ loader: 'html-loader' }]
-            }
+            },
+            {
+                test: /\.css$/i,
+                use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
+            },
         ]
     },
     plugins: [
