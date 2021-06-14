@@ -1,4 +1,4 @@
-import React, { createContext, FunctionComponent, useState } from 'react'
+import React, { createContext, FunctionComponent, useMemo, useState } from 'react'
 import { IPosition, ISuggestion } from './types';
 
 export type GetStateType = {
