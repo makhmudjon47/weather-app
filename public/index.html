@@ -8,5 +8,13 @@
 </head>
 <body>
     <div id="root"></div>
+    <div id="google-map" style="display:none"></div>
+    <script>
+        function initialize() {
+          window.GooglePlacesService = new google.maps.places.PlacesService(document.getElementById('google-map'));
+          window.GoogleAutocompleteService = new google.maps.places.AutocompleteService();
+        }
+      </script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCewBMzVpzNrHS2e3JEjpM4C4PgsnHEov0&libraries=places&callback=initialize"></script>
 </body>
 </html>

@@ -1,19 +1,26 @@
 import React, { FunctionComponent } from 'react'
+import { useGetData } from '../../../hooks'
+import { getWeatherIcon } from '../../../utils'
+import { useData } from './useData'
 
-interface IProps {}
+const Info: FunctionComponent = () => {
+    const { city, temp, icon, desc } = useGetData()
+    const { error, time } = useData()
 
-const Info: FunctionComponent<IProps> = () => {
+    if(error) return <span>{error}</span>
+
     return (
-        <div className="absolute bottom-24 left-24 w-[fit-content] flex">
-            <div className="relative celsius mr-8">
-                <span className="text-white text-8xl">16</span>
+        <div className="absolute bottom-24 left-24 h-[fit-content] w-[fit-content] flex flex-row">
+            <div className="relative flex items-end celsius">
+                <span className="text-white text-8xl">{Math.round(Number.parseFloat(temp))}</span>
             </div>
-            <div className="flex items-end pb-2">
-                <span className="text-5xl text-white">London</span>
+            <div className="flex flex-col gap-2 ml-[3rem] justify-end">
+                <span className="text-3xl text-white overflow-ellipsis whitespace-nowrap">{`${city}`}</span>
+                <span className="text-[rgba(240,240,240,0.8)] text-base">{time}</span>
             </div>
-            <div className="flex flex-col border-2 border-red-600 px-8 justify-center">
-                <span>icon</span>
-                <span>Cloudy</span>
+            <div className="flex flex-col items-center text-white text-xl px-8 justify-center">
+                <img alt="Loading..." src={getWeatherIcon(icon)} />
+                <span>{desc}</span>
             </div>
         </div>
     )

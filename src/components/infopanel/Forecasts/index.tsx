@@ -1,41 +1,18 @@
 import React, { FunctionComponent } from 'react'
+import { getWeatherIcon } from '../../../utils'
+import { useData } from './useData'
 
 interface IProps {}
 
-const forecasts = [
-    {
-        day: 'Monday',
-        date: '12-06-2021',
-        status: 'Sunny',
-        icon: 'IC'
-    },
-    {
-        day: 'Tuesday',
-        date: '12-06-2021',
-        status: 'Sunny',
-        icon: 'IC'
-    },
-    {
-        day: 'Wednesday',
-        date: '12-06-2021',
-        status: 'Sunny',
-        icon: 'IC'
-    },
-    {
-        day: 'Thursday',
-        date: '12-06-2021',
-        status: 'Sunny',
-        icon: 'IC'
-    },
-    {
-        day: 'Friday',
-        date: '12-06-2021',
-        status: 'Sunny',
-        icon: 'IC'
-    },
-]
+function formatter(value: number) {
+    return <span className="relative ml-1 mr-2 border-inherit info-celsius">{Math.round(value)}</span>
+}
 
 const Forecasts: FunctionComponent<IProps> = () => {
+    const { error, forecasts } = useData()
+
+    if(error) return <span>{error}</span>
+
     return (
         <div className="relative mx-14 py-10">
             <div className="absolute top-0 left-0 w-full h-[1px] bg-[#849098]"/>
@@ -48,11 +25,17 @@ const Forecasts: FunctionComponent<IProps> = () => {
                     </thead>
                     <tbody>
                         {
-                            forecasts.map((data, index) => (
-                                <tr key={index} className="leading-10 whitespace-nowrap text-primary-3 cursor-pointer hover:text-primary-1">
-                                    <td>{data.day}</td>
-                                    <td>{data.date}</td>
-                                    <td>{`${data.status} ${data.icon}`}</td>
+                            forecasts?.map((data, index) => (
+                                <tr key={index} className="group leading-10 whitespace-nowrap text-primary-3 cursor-pointer hover:text-primary-1">
+                                    <td>
+                                        <span>{data.weekString}</span>
+                                        <span className="ml-4 relative border-primary-3 group-hover:border-primary-1">{formatter(data.min_temp)}/{formatter(data.max_temp)}</span>
+                                    </td>
+                                    <td>{data.dateString}</td>
+                                    <td className="flex items-center">
+                                        <span className="ml-2">{data.status.desc}</span>
+                                        <img className="w-8 h-8 ml-4" alt="." src={getWeatherIcon(data.status.icon)} />
+                                    </td>
                                 </tr>
                             ))
                         }

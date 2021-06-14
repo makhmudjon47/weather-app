@@ -14,6 +14,9 @@ module.exports = {
       },
       gridTemplateColumns: {
         custom: '2fr 1.2fr'
+      },
+      borderColor: {
+        'inherit': 'inherit'
       }
     },
   },

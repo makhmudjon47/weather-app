@@ -8,14 +8,30 @@
     backdrop-filter: blur(1.8rem);
 }
 
-.celsius:after {
+.celsius:before {
     position: absolute;
     content: '';
     width: 25px;
     height: 25px;
     border-radius: 50%;
     border: 6px solid white;
-    top: 1rem;
+    top: 2.5rem;
+    right: -2rem;
+}
+
+.info-celsius:before {
+    @apply rounded w-1 h-1;
+    position: absolute;
+    content: '';
+    border-width: 1px;
+    border-style: solid;
+    border-color: inherit;
+    top: 3px;
+    right: -8px;
+}
+
+.main-panel-container {
+    @apply z-10 relative grid items-center text-white text-2xl;
 }
 
 table {

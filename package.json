@@ -4,8 +4,8 @@
   "description": "Sample project for livetalks",
   "main": "index.js",
   "scripts": {
-    "start": "npx webpack serve",
-    "build": "npx webpack",
+    "start": "webpack serve",
+    "build": "webpack",
     "test": "jest"
   },
   "author": "Makhmudjon Inadullaev",
@@ -23,6 +23,7 @@
     "autoprefixer": "^10.2.6",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.2.2",
+    "babel-polyfill": "^6.26.0",
     "css-loader": "^5.2.6",
     "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.1",
