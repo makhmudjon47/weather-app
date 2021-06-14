@@ -2,6 +2,7 @@ const HtmlPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require('path')
 const webpack = require('webpack')
+
 require('dotenv').config()
 
 module.exports = {
@@ -46,12 +47,12 @@ module.exports = {
         new webpack.DefinePlugin({
             "process.env": {
                 "PORT": JSON.stringify(process.env.PORT),
-                "NODE_ENV": JSON.stringify(process.env.NODE_ENV),
                 "API_KEY_OPENWEATHER": JSON.stringify(process.env.API_KEY_OPENWEATHER),
                 "API_KEY_GEOLOCATION": JSON.stringify(process.env.API_KEY_GEOLOCATION),
+                "API_KEY_TIMEZONE": JSON.stringify(process.env.API_KEY_TIMEZONE),
                 "TAILWIND_MODE": JSON.stringify(process.env.TAILWIND_MODE),
             }
-        })
+        }),
     ],
     devServer: {
         historyApiFallback: true,
