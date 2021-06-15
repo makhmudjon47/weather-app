@@ -1,59 +1,79 @@
 import { useEffect, useState } from "react";
-import { useGetData } from "../../../hooks";
+import { useHistory } from "react-router-dom";
+import { useGetData, useSetData } from "../../../hooks";
+import { IForecast } from "../../../hooks/types";
 import weatherService from '../../../services/weather';
 
 const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-interface IForecast {
-    date: Date,
-    min_temp: number,
-    max_temp: number,
-    weekString: string,
-    dateString: string,
-    status: {
-        desc: string
-        icon: string
-    }
+function mapToForecast(data: any[]): IForecast[] {
+    return data.map(item => {
+        const date = new Date(item.dt_txt)
+        return {
+            date,
+            weekString: dayNames[date.getDay()],
+            dateString: `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`,
+            min_temp: item.temp_min || item.main.temp_min,
+            max_temp: item.temp_max || item.main.temp_max,
+            status: {
+                desc: item.weather[0]?.description,
+                icon: item.weather[0]?.icon
+            }
+        }
+    })
 }
 
-function formatter(data: any[]): IForecast[] {
-    const result: IForecast[] = []
+function filterHourly(data: any[], week: string): any[] {
+    return data.filter((item: any) => {
+        const date = new Date(item.dt_txt)
+        return date.getDay() === dayNames.map(v => v.toLowerCase()).indexOf(week)
+    })
+}
 
-    data.forEach(item => {
+function filterWeekly(data: any[]): any[] {
+    const result: any[] = []
+    data.forEach((item: any) => {
         const date = new Date(item.dt_txt)
         const { temp_min, temp_max } = item.main
         const resultItem = result[result.length - 1]
-
-        if((date.getDate() === resultItem?.date.getDate())) {
-            if(Number.parseFloat(temp_min) < resultItem.min_temp) {
-                resultItem.min_temp = Number.parseFloat(temp_min)
+        if((date.getDate() === resultItem?.date?.getDate())) {
+            if(Number.parseFloat(temp_min) < resultItem.temp_min) {
+                resultItem.temp_min = Number.parseFloat(temp_min)
             }
-            if(Number.parseFloat(temp_max) > resultItem.max_temp) {
-                resultItem.max_temp = Number.parseFloat(temp_max)
+            if(Number.parseFloat(temp_max) > resultItem.temp_max) {
+                resultItem.temp_max = Number.parseFloat(temp_max)
             }
         } else {
-            result.push({
-                date,
-                weekString: dayNames[date.getDay()],
-                dateString: `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`,
-                min_temp: Number.parseFloat(temp_min),
-                max_temp: Number.parseFloat(temp_max),
-                status: {
-                    desc: item.weather[0]?.description,
-                    icon: item.weather[0]?.icon
-                }
-            })
+            result.push({ ...item, temp_min, temp_max, date })
         }
     })
-
     return result
 }
 
 export function useData() {
+    const [data, setData] = useState<any[]>([])
+
+    const history = useHistory()
     const [loading, setLoading] = useState<boolean>(true)
     const [error, setError] = useState<string>('')
-    const { position } = useGetData()
     const [forecasts, setForecasts] = useState<IForecast[]>()
+
+    const { position } = useGetData()
+    const { setHourlyData } = useSetData()
+
+    useEffect(() => {
+        const unregister = history.listen(function(location: any) {
+            const expected = `${location.pathname?.split('/')[1]}`
+            if(dayNames.map(v => v.toLowerCase()).includes(expected)) {
+                const filtered = filterHourly(data, expected)
+                const result = mapToForecast(filtered)
+                setHourlyData(result)
+            } else {
+                setHourlyData([])
+            }
+        })
+        return () => { unregister() }
+    }, [data])
 
     useEffect(() => {
         let mounted = false
@@ -63,7 +83,9 @@ export function useData() {
             try {
                 const { data } = await weatherService.getForecastWeather(position[0], position[1])
                 if(!mounted) {
-                    const predictions = formatter(data.list)
+                    const filtered = filterWeekly(data.list)
+                    const predictions = mapToForecast(filtered)
+                    setData(data.list)
                     setForecasts(predictions)
                 }
             } catch(error) {

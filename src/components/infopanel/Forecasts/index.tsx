@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import { getWeatherIcon } from '../../../utils'
 import { useData } from './useData'
+import { useHistory } from 'react-router-dom'
 
 interface IProps {}
 
@@ -9,6 +10,7 @@ function formatter(value: number) {
 }
 
 const Forecasts: FunctionComponent<IProps> = () => {
+    const history = useHistory()
     const { error, forecasts } = useData()
 
     if(error) return <span>{error}</span>
@@ -26,7 +28,7 @@ const Forecasts: FunctionComponent<IProps> = () => {
                     <tbody>
                         {
                             forecasts?.map((data, index) => (
-                                <tr key={index} className="group leading-10 whitespace-nowrap text-primary-3 cursor-pointer hover:text-primary-1">
+                                <tr onClick={() => history.push(data.weekString.toLowerCase())} key={index} className="group leading-10 whitespace-nowrap text-primary-3 cursor-pointer hover:text-primary-1">
                                     <td>
                                         <span>{data.weekString}</span>
                                         <span className="ml-4 relative border-primary-3 group-hover:border-primary-1">{formatter(data.min_temp)}/{formatter(data.max_temp)}</span>
