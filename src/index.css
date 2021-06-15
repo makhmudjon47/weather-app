@@ -30,6 +30,11 @@
     right: -8px;
 }
 
+.point-celsius:before {
+    top: 2px;
+    right: 2px;
+}
+
 .main-panel-container {
     @apply z-10 relative grid items-center text-white text-2xl;
 }
