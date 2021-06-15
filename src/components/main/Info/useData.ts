@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import { useGetData } from "../../../hooks";
 import timezoneService from '../../../services/timezone';
-
-const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "November", "Dec"];
+import { getMonthName, getWeekName } from '../../../utils'
 
 function formatter(date: Date): string {
     const hours = date.getHours()
     const minutes = date.getMinutes()
-    const week = dayNames[date.getDay()]
-    const month = monthNames[date.getMonth()]
+    const week = getMonthName(date)
+    const month = getWeekName(date)
     const day = date.getDate()
     const year = date.getFullYear()
     return `${hours < 10 ? 0 : ''}${hours}:${minutes < 10 ? 0 : ''}${minutes} - ${week}, ${day} ${month} ${year}`

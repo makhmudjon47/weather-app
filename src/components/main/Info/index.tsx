@@ -9,7 +9,7 @@ const Info: FunctionComponent = () => {
 
     if(error) return <span>{error}</span>
 
-    return (
+    return city && temp && icon && (
         <div className="absolute bottom-24 left-24 h-[fit-content] w-[fit-content] flex flex-row">
             <div className="relative flex items-end celsius">
                 <span className="text-white text-8xl">{Math.round(Number.parseFloat(temp))}</span>
@@ -23,7 +23,7 @@ const Info: FunctionComponent = () => {
                 <span>{desc}</span>
             </div>
         </div>
-    )
+    ) || <></>
 }
 
 export default Info
