@@ -1,5 +1,5 @@
 import React, { createContext, FunctionComponent, useMemo, useState } from 'react'
-import { IPosition, ISuggestion } from './types';
+import { IForecast, IPosition, ISuggestion } from './types';
 
 export type GetStateType = {
     city: string
@@ -7,6 +7,7 @@ export type GetStateType = {
     icon: string
     desc: string
     position: number[]
+    hourlyData: IForecast[]
     suggestions: ISuggestion[]
 };
 
@@ -17,6 +18,7 @@ export type SetStateType = {
     setCity: (value: string) => void
     setPosition: (value: number[]) => void
     setSuggestions: (value: ISuggestion[]) => void
+    setHourlyData: (value: IForecast[]) => void
 }
 
 const getContext = createContext<GetStateType>({
@@ -24,8 +26,9 @@ const getContext = createContext<GetStateType>({
     temp: '',
     icon: '',
     desc: '',
+    hourlyData: [],
     position: [],
-    suggestions: []
+    suggestions: [],
 });
 const setContext = createContext<SetStateType>({
     setTemp: () => {},
@@ -33,7 +36,8 @@ const setContext = createContext<SetStateType>({
     setDesc: () => {},
     setCity: () => {},
     setPosition: () => {},
-    setSuggestions: () => {}
+    setSuggestions: () => {},
+    setHourlyData: () => {},
 });
 
 const WeatherProvider: FunctionComponent = ({ children }) => {
@@ -43,10 +47,11 @@ const WeatherProvider: FunctionComponent = ({ children }) => {
     const [desc, setDesc] = useState<string>('')
     const [position, setPosition] = useState<number[]>([])
     const [suggestions, setSuggestions] = useState<ISuggestion[]>([])
+    const [hourlyData, setHourlyData] = useState<IForecast[]>([])
 
   return (
-    <getContext.Provider value={{ suggestions, position, city, icon, desc, temp }}>
-        <setContext.Provider value={{ setSuggestions, setPosition, setCity, setIcon, setDesc, setTemp }}>
+    <getContext.Provider value={{ hourlyData, suggestions, position, city, icon, desc, temp }}>
+        <setContext.Provider value={{ setHourlyData, setSuggestions, setPosition, setCity, setIcon, setDesc, setTemp }}>
             {children}
         </setContext.Provider>
     </getContext.Provider>
