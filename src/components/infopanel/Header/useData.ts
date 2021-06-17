@@ -55,7 +55,7 @@ export function useData() {
                       setSuggestions(value)
                     }
                 })
-                .catch((error) => console.error(error.message))
+                .catch(console.error)
             })
         } else {
           if(!mounted) {

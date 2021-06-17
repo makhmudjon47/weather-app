@@ -40,12 +40,11 @@ export function useData() {
                 const country = value.address_components.find((address: any) => address.types.includes('country'))
                 const city = value.address_components.find((address: any) => address.types.includes('locality') || address.types.includes('administrative_area_level_1'))
                 setPosition([lat(), lng()])
-                console.log(value)
                 setSuggestions([])
                 setCity(`${city?.long_name && city?.long_name + ', ' || ''}${country?.long_name || ''}`)
               }
             })
-            .catch(error => console.error(error.message))
+            .catch(console.error)
         }
         return () => { mounted = true }
     }, [placeId])
