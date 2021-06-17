@@ -5,12 +5,20 @@ import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import { options } from './options'
 
+interface IData {
+  time: string,
+  x: number,
+  y: number,
+  celsius: Number,
+  icon: string
+}
+
 export default () => {
     const { hourlyData } = useGetData()
-    const [data, setData] = useState([])
+    const [data, setData] = useState<IData[]>([])
     const [date, setDate] = useState('')
 
-    function setFormattedDate(date) {
+    function setFormattedDate(date: Date) {
       const formatted = getWeekName(date) + ', ' + date.getDate() + ' ' + getMonthName(date) +' ' + date.getFullYear();
       setDate(formatted)
     }
@@ -46,5 +54,5 @@ export default () => {
             options={chartOptions}
           />
       </div>
-  ) : ''
+  ) : <></>
 }

@@ -8,7 +8,7 @@ interface IProps {}
 
 const InfoPanel: FunctionComponent<IProps> = () => {
     return (
-        <div className="z-10 info-panel overflow-auto">
+        <div className="hidden md:inline z-10 info-panel overflow-auto">
             <Header />
             <Suggestions />
             <Details />

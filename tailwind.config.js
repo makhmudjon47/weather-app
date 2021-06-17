@@ -13,6 +13,7 @@ module.exports = {
         'primary-3': '#b3bbbe'
       },
       gridTemplateColumns: {
+        'custom-md': '1fr 1fr',
         'custom-xl': '2fr 1.2fr',
         'custom-lg': '2fr 1.5fr'
       },

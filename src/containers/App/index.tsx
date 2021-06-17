@@ -26,14 +26,16 @@ const App: FunctionComponent<IProps> = () => {
             </div>
         )
     return (
-        <div className="invisible lg:visible w-[100vw] h-[100vh] fixed grid lg:grid-cols-custom-lg xl:grid-cols-custom-xl overflow-auto">
-            <Router>
-                <div className="absolute w-full h-full">
+        <div className="w-[100vw] h-[100vh] fixed">
+                <div className="absolute min-w-[500px] min-h-[500px] w-full h-full z-10">
                     <WeatherImage key={icon} src={icon} className="w-full h-full"/>
                 </div>
-                <MainPanel />
-                <InfoPanel />
-            </Router>
+                <div className="z-20 relative grid-cols-1 md:grid-cols-custom-md lg:grid-cols-custom-lg xl:grid-cols-custom-xl overflow-auto grid w-full h-full">
+                    <Router>
+                        <MainPanel />
+                        <InfoPanel />
+                    </Router>
+                </div>
         </div>
     )
 }
