@@ -1,6 +1,6 @@
 <a href='https://weather.makhmudjon.uz' target="_blank"><img src='https://aux.iconspalace.com/uploads/18114440851139460815.png' height='60' alt='Weather Logo' aria-label='weather.makhmudjon.uz' /></a>
 <h1>Weather App</h1>
-You can easely see what your weather is currently, and any time through the week.
+You can easely see what your weather is currently, and for any time through the week.
 This app is not only helps with detecting your current weather despite where you are located, it shows the current time also.
 Which means that you can see the time where your friend lives in the world. Additionally, you can see overall graph of daily weather change forecasts.
 
