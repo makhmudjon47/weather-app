@@ -13,7 +13,8 @@ module.exports = {
         'primary-3': '#b3bbbe'
       },
       gridTemplateColumns: {
-        custom: '2fr 1.2fr'
+        'custom-xl': '2fr 1.2fr',
+        'custom-lg': '2fr 1.5fr'
       },
       borderColor: {
         'inherit': 'inherit'

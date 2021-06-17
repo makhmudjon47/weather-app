@@ -1,10 +1,10 @@
 import React, { FunctionComponent } from 'react'
 import MainPanel from '../../views/MainPanel'
 import InfoPanel from '../../views/InfoPanel'
-import { assets } from '../../utils/assets'
 import { useData } from './useData'
 import { useGetData } from '../../hooks'
 import { BrowserRouter as Router } from 'react-router-dom'
+import WeatherImage from '../../components/WeatherImage'
 
 interface IProps {}
 
@@ -26,9 +26,11 @@ const App: FunctionComponent<IProps> = () => {
             </div>
         )
     return (
-        <div className="invisible sm:visible w-[100vw] h-[100vh] fixed grid grid-cols-custom overflow-auto">
+        <div className="invisible lg:visible w-[100vw] h-[100vh] fixed grid lg:grid-cols-custom-lg xl:grid-cols-custom-xl overflow-auto">
             <Router>
-                <img className="w-full h-full absolute" alt="loading..." src={assets[icon]}/>
+                <div className="absolute w-full h-full">
+                    <WeatherImage key={icon} src={icon} className="w-full h-full"/>
+                </div>
                 <MainPanel />
                 <InfoPanel />
             </Router>

@@ -16,7 +16,7 @@ const Forecasts: FunctionComponent<IProps> = () => {
     if(error) return <span>{error}</span>
 
     return (
-        <div className="relative mx-14 py-10">
+        <div className="relative overflow-auto mx-14 py-10">
             <div className="absolute top-0 left-0 w-full h-[1px] bg-[#849098]"/>
             <div>
                 <table className="w-full text-primary-1 text-left">
