@@ -48,7 +48,7 @@ You can start development by `start` command
 ```
 npm run start
 ```
-And finally if you want, you can build for static files
+And finally if you want, you can `build` for static files
 ```
 npm run build
 ```
