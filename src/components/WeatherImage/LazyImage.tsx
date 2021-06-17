@@ -14,9 +14,6 @@ export const LazyImage: FunctionComponent<IProps> = ({ src, alt, code, className
   const [isblured, setIsblured] = useState(true);
 
   const onLoad = (event) => {
-    setTimeout(() => {
-      setIsblured(false);
-    }, 3000)
     event.target.classList.add("loaded");
   };
 
@@ -36,9 +33,8 @@ export const LazyImage: FunctionComponent<IProps> = ({ src, alt, code, className
                 !didCancel &&
                 (entry.intersectionRatio > 0 || entry.isIntersecting)
               ) {
-                setTimeout(() => {
-                  setImageSrc(src);
-                }, 3000)
+                setImageSrc(src);
+                setIsblured(false);
               }
             });
           },
