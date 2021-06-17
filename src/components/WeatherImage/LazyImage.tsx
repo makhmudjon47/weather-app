@@ -32,7 +32,6 @@ export const LazyImage: FunctionComponent<IProps> = ({ src, alt, code, className
         observer = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
-              // when image is visible in the viewport + rootMargin
               if (
                 !didCancel &&
                 (entry.intersectionRatio > 0 || entry.isIntersecting)
@@ -50,13 +49,11 @@ export const LazyImage: FunctionComponent<IProps> = ({ src, alt, code, className
         );
         observer.observe(imageRef);
       } else {
-        // Old browsers fallback
         setImageSrc(src);
       }
     }
     return () => {
       didCancel = true;
-      // on component unmount, we remove the listner
       if (observer && observer.unobserve) {
         observer.unobserve(imageRef);
       }
