@@ -10,12 +10,14 @@ const Info: FunctionComponent = () => {
 
     if(error) return <span>{error}</span>
 
-    return city && temp && icon && (
+    if(!city || !temp || !icon) return <></>
+
+    return  (
         <>
             <Max time={time} desc={desc} temp={temp} icon={icon} city={city}/>
             <Mini time={time} desc={desc} temp={temp} icon={icon} city={city}/>
         </>
-    ) || <></>
+    )
 }
 
 export default Info
