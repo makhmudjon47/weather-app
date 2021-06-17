@@ -43,28 +43,6 @@ table {
     border-spacing: 1rem;
 }
 
-
-.blured {
-  filter: blur(15px);
-}
-
-@keyframes loaded {
-  0% {
-    opacity: 0.1;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.custom-image.loaded:not(.has-error) {
-  animation: loaded 300ms ease-in-out;
-}
-.custom-image.has-error {
-  content: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/BSOD_Windows_8.svg/1200px-BSOD_Windows_8.svg.png');
-}
-
-
 ::-webkit-scrollbar {
     width: 0.5em;
 }
