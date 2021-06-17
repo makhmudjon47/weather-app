@@ -6,7 +6,7 @@ Which means that you can see the time where your friend lives in the world. Addi
 
 ## Installation
 
-First thing you must do is clonning the repository, make sure that you have installed <a href="https://nodejs.org/en/download" target="_blank">nodle</a> latest version and <a href="https://git-scm.com/downloads" target="_blank">git</a>
+First thing you must do is clonning the repository, make sure that you have installed <a href="https://nodejs.org/en/download" target="_blank">node</a> latest version and <a href="https://git-scm.com/downloads" target="_blank">git</a>
 ```
 git clone https://github.com/makhmudjon47/weather-app.git
 ```
