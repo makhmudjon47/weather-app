@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="https://aux.iconspalace.com/uploads/18114440851139460815.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+</head>
+<body>
+    <div id="root"></div>
+    <div id="google-map" style="display:none"></div>
+    <script>
+        function initialize() {
+          window.GooglePlacesService = new google.maps.places.PlacesService(document.getElementById('google-map'));
+          window.GoogleAutocompleteService = new google.maps.places.AutocompleteService();
+        }
+      </script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS8kTq_H6aWe954LutK-TtAPTfUwMHfIM&libraries=places&callback=initialize"></script>
+</body>
+</html>
